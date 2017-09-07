@@ -283,7 +283,7 @@
           var scrollDelta = previousScroll - self.scroll
           self.fovVelocity += scrollDelta * 10 * dt / 6000
           // applay foy
-          fov = Math.max(10, parseFloat(fov) + self.fovVelocity)
+          fov = Math.min(150, Math.max(10, parseFloat(fov) + self.fovVelocity))
           self.el.setAttribute('fov', fov)
           previousScroll = self.scroll
         }
