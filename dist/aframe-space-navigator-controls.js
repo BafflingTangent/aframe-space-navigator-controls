@@ -28,23 +28,29 @@
 
 	    schema: {
 	      // Controller 0-3
-	      controller:        { default: 0, oneOf: [0, 1, 2, 3] },
+	      controller:           { default: 0, oneOf: [0, 1, 2, 3] },
 
 	      // Enable/disable features
-	      enabled:           { default: true },
-	      movementEnabled:   { default: true },
-	      lookEnabled:       { default: true },
-	      flyEnabled:        { default: true },
-	      invertPitch:       { default: false },
-	      rollEnabled:       { default: true },
+	      enabled:              { default: true },
+	      movementEnabled:      { default: true },
+	      lookEnabled:          { default: true },
+	      rollEnabled:          { default: true },
+	      invertPitch:          { default: false },
+	      fovEnabled:           { default: true },
+	      fovMin:               { default: 2 },
+	      fovMax:               { default: 115 },
 
 	      // Constants
 	      rotationSensitivity:  { default: 0.05 },
 	      movementEasing:       { default: 3 },
 	      movementAcceleration: { default: 700 },
+	      fovSensitivity:       { default: 0.01 },
+	      fovEasing:            { default: 3 },
+	      fovAcceleration:      { default: 5 },
+	      invertScroll:         { default: false },
 
 	      // Debugging
-	      debug:             { default: false }
+	      debug:                { default: false }
 	    },
 
 	    /*******************************************************************
@@ -75,14 +81,15 @@
 	      this.scroll = 0;
 	      this.scrollDelta = 0;
 	      // IE, Opera, Google Chrome, Safari
+	      var inverScrollFactor = this.data.invertScroll ? -1 : 1;
 	      document.addEventListener('mousewheel', function(event){
 	        event.preventDefault();
-	        self.scroll -= event.wheelDelta / 60;
+	        self.scroll += event.wheelDelta / 60 * inverScrollFactor;
 	      });
 	      // Firefox
 	      document.addEventListener('DOMMouseScroll', function(event){
 	        event.preventDefault();
-	        self.scroll += event.detail;
+	        self.scroll -= event.detail * inverScrollFactor;
 	      });
 
 	      if (!this.getSpaceNavigator()) {
@@ -100,7 +107,7 @@
 	      this.updateRotation(dt);
 	      this.updatePosition(dt);
 	      this.updateButtonState();
-	      this.updateFov(dt);
+	      if (this.data.fovEnabled) this.updateFov(dt);
 	    },
 
 	    /*******************************************************************
@@ -175,7 +182,6 @@
 	        direction.copy(velocity);
 	        direction.multiplyScalar(dt / 1000);
 	        if (!rotation) return direction
-	        if (!this.data.flyEnabled) rotation.x = 0;
 	        euler.set(rotation.x * DEG_TO_RAD, rotation.y * DEG_TO_RAD, rotation.z * DEG_TO_RAD );
 	        direction.applyEuler(euler);
 	        return direction
@@ -271,22 +277,28 @@
 	    updateFov: function (dt) {
 	      if (this._updateFov) return this._updateFov(dt)
 
-	      var previousScroll = 0;
 	      var self = this;
+	      var previousScroll = 0;
 
 	      this._updateFov = function (dt) {
-	        var fov = self.el.getAttribute('fov');
-	        if (fov) {
-	          // easing
-	          self.fovVelocity -= self.fovVelocity * 3 * dt / 6000;
-	          // acceleration
-	          var scrollDelta = previousScroll - self.scroll;
-	          self.fovVelocity += scrollDelta * 10 * dt / 6000;
-	          // applay foy
-	          fov = Math.max(10, parseFloat(fov) + self.fovVelocity);
-	          self.el.setAttribute('fov', fov);
-	          previousScroll = self.scroll;
-	        }
+	        var fovFromAttribute = self.el.getAttribute('fov');
+	        var fov = fovFromAttribute ? parseFloat(fovFromAttribute) : 60;
+	        var lensDistance = 1 / Math.tan(fov / 2 * DEG_TO_RAD);
+	        // easing
+	        if (dt > 1000) return
+	        self.fovVelocity = self.fovVelocity - self.fovVelocity * dt / 1000 * self.data.fovEasing;
+	        if (self.fovVelocity > -0.001 && self.fovVelocity < 0.001) self.fovVelocity = 0;
+	        // acceleration
+	        var scrollDelta = previousScroll - self.scroll;
+	        self.fovVelocity += scrollDelta * dt / 1000 * self.data.fovAcceleration;
+	        //console.log(self.fovVelocity)
+	        // applay
+	        var newLensDistance = lensDistance + self.fovVelocity * self.data.fovSensitivity;
+	        //var newFov = Math.min(140, Math.max(10, Math.atan( 1 / newLensDistance ) * 2))
+	        fov = Math.atan(1 / newLensDistance) * 2 * RAD_TO_DEG;
+	        if (fov > self.data.fovMin && fov < self.data.fovMax) self.el.setAttribute('fov', fov);
+	        previousScroll = self.scroll;
+
 	      };
 
 	      return this._updateFov(dt)
