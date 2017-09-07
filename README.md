@@ -1,6 +1,4 @@
-# A-Frame `space-navigator-controls`
-
-Space Navigator controls for A-Frame.
+# Space Navigator Controls for A-Frame
 
 Based on:
 https://donmccurdy.github.io/aframe-gamepad-controls/
@@ -20,7 +18,7 @@ This component uses the HTML5 [Gamepad API](https://developer.mozilla.org/en-US/
     <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
 
     <!-- Component -->
-    <script src="dist/aframe-space-navigator-controls.js"></script>
+    <script src="https://rawgit.com/archilogic-com/aframe-space-navigator-controls/master/dist/aframe-space-navigator-controls.js"></script>
   </head>
   <body>
     <a-scene>
