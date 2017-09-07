@@ -1,12 +1,13 @@
-# A-Frame `gamepad-controls`
+# A-Frame `space-navigator-controls`
 
-Gamepad controls for A-Frame.
+Space Navigator controls for A-Frame.
 
-Demo: https://donmccurdy.github.io/aframe-gamepad-controls/
+Based on:
+https://donmccurdy.github.io/aframe-gamepad-controls/
 
 ## Overview
 
-Supports one or more gamepads, attached to an A-Frame scene. When used on a mobile device, `gamepad-controls` can also receive input from a gamepad connected to a host machine, using [ProxyControls.js](https://proxy-controls.donmccurdy.com).
+Supports one or more space navigators, attached to an A-Frame scene. When used on a mobile device, `space-navigator-controls` can also receive input from a Space Navigator connected to a host machine, using [ProxyControls.js](https://proxy-controls.donmccurdy.com).
 
 This component uses the HTML5 [Gamepad API](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API). The underlying API supports Firefox, Chrome, Edge, and Opera ([as of 01/2016](http://caniuse.com/#search=gamepad)). Safari and Internet Explorer do not currently support gamepads.
 
@@ -16,15 +17,15 @@ This component uses the HTML5 [Gamepad API](https://developer.mozilla.org/en-US/
 <html>
   <head>
     <!-- A-Frame Library -->
-    <script src="https://aframe.io/releases/0.3.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
 
     <!-- Component -->
-    <script src="dist/aframe-gamepad-controls.js"></script>
+    <script src="dist/aframe-space-navigator-controls.js"></script>
   </head>
   <body>
     <a-scene>
       <!-- ... -->
-      <a-entity camera gamepad-controls></a-entity>
+      <a-entity camera space-navigator-controls></a-entity>
     </a-scene>
   </body>
 </html>
@@ -35,15 +36,15 @@ This component uses the HTML5 [Gamepad API](https://developer.mozilla.org/en-US/
 Install NPM module.
 
 ```
-$ npm install aframe-gamepad-controls
+$ npm install aframe-space-navigator-controls
 ```
 
 Register `gamepad-controls` component.
 
 ```javascript
 var AFRAME = require('aframe');
-var GamepadControls = require('aframe-gamepad-controls');
-AFRAME.registerComponent('gamepad-controls', GamepadControls);
+var GamepadControls = require('aframe-space-navigator-controls');
+AFRAME.registerComponent('space-navigator-controls', GamepadControls);
 ```
 
 Add markup.

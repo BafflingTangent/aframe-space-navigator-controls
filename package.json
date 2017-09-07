@@ -1,62 +1,36 @@
 {
-  "name": "aframe-gamepad-controls",
-  "version": "0.6.0",
-  "description": "Gamepad controls for A-Frame.",
-  "main": "gamepad-controls.js",
-  "config": {
-    "demo_port": 8000
-  },
+  "name": "aframe-space-navigator-controls",
+  "description": "Aframe component enabling the use of space navigator 3D mouse by 3Dconnexion.",
+  "version": "1.0.0",
+  "homepage": "https://archilogic-com.github.io/aframe-space-navigator-controls",
+  "repository": "archilogic-com/aframe-space-navigator-controls",
   "scripts": {
-    "dev": "budo browser.js:bundle.js --dir examples --port $npm_package_config_demo_port --live",
-    "dist": "webpack browser.js dist/aframe-gamepad-controls.js && webpack -p browser.js dist/aframe-gamepad-controls.min.js",
-    "postpublish": "npm run dist",
-    "test": "karma start ./tests/karma.conf.js",
-    "preversion": "karma start ./tests/karma.conf.js --single-run",
-    "version": "npm run dist && git add -A dist",
-    "postversion": "git push && git push --tags && npm publish"
+    "start": "rollup -c tasks/rollup.config.js --watch& lite-server -c tasks/lite-server.config.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/donmccurdy/aframe-gamepad-controls.git"
+  "license": "MIT",
+  "author": {
+    "name": "archilogic",
+    "email": "dev.rocks@3d.io",
+    "url": "https://3d.io"
   },
+  "main": "dist/aframe-space-navigator-controls.js",
   "keywords": [
     "aframe",
-    "aframe-component",
-    "layout",
-    "aframe-vr",
-    "vr",
-    "aframe-layout",
-    "mozvr",
-    "webvr",
-    "gamepad",
-    "controller",
-    "joystick"
+    "3d",
+    "cardboard",
+    "components",
+    "WebVR",
+    "WegGL",
+    "three",
+    "three.js",
+    "3D model",
+    "3d.io"
   ],
-  "author": "Don McCurdy <dm@donmccurdy.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/donmccurdy/aframe-gamepad-controls/issues"
-  },
-  "homepage": "https://github.com/donmccurdy/aframe-gamepad-controls#readme",
   "dependencies": {},
-  "peerDependencies": {
-    "aframe": ">=0.5.0"
-  },
   "devDependencies": {
-    "aframe": ">=0.5.0",
-    "browserify": "^12.0.1",
-    "browserify-css": "^0.8.3",
-    "budo": "^7.1.0",
-    "chai": "^3.4.1",
-    "chai-shallow-deep-equal": "^1.3.0",
-    "karma": "^0.13.15",
-    "karma-browserify": "^4.4.2",
-    "karma-chai-shallow-deep-equal": "0.0.4",
-    "karma-firefox-launcher": "^0.1.7",
-    "karma-mocha": "^0.2.1",
-    "karma-mocha-reporter": "^1.1.3",
-    "karma-sinon-chai": "^1.1.0",
-    "mocha": "^2.3.4",
-    "webpack": "^1.12.9"
+    "lite-server": "^2.3.0",
+    "rollup": "^0.49.2",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0"
   }
 }
