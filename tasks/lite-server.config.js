@@ -3,7 +3,7 @@
 module.exports = {
 	port: 3000,
 	startPath: '/',
-	files: ['index.html','dist'],
+	files: ['index.html','examples/**','dist'],
 	serveStatic: ['./'], // uses index.html in directories
 	server: {
 		directory: true,
