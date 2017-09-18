@@ -1,17 +1,29 @@
 <html>
-  <head>
-    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-    <script src="https://dist.3d.io/3dio-js/1.x.x-beta/3dio.min.js"></script>
+<head>
+  <style>
+    a {
+      display: block;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
 
-    <script src="../dist/aframe-space-navigator-controls.js"></script>
-  </head>
-  <body>
-    <a-scene>
+<h1>Space Navigator 3D Mouse for WebGL</h1>
 
-      <a-entity io3d-data3d="url:https://storage.3d.io/535e624259ee6b0200000484/170907-0007-612jp5/archilogic_2017-09-07_00-07-10_3g2lXj.gz.data3d.buffer"></a-entity>
+<h3>Examples:</h3>
 
-      <a-camera space-navigator-controls fov="55"></a-camera>
+<a href="./examples/aframe.html">
+  A-Frame Component
+</a>
 
-    </a-scene>
-  </body>
+<a href="./examples/aframe-inspector.html">
+  A-Frame Inspector
+</a>
+
+<a href="./examples/three.html">
+  THREE.js
+</a>
+
+</body>
 </html>
