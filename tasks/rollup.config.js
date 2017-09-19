@@ -5,7 +5,7 @@ import commonjs from 'rollup-plugin-commonjs'
 export default {
 	input: 'src/aframe-space-navigator-controls.js',
 	indent: '\t',
-	sourcemap: true,
+	sourcemap: false,
 	plugins: [
 		commonjs(),
 		resolve()
