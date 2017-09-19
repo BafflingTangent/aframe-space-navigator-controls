@@ -1,9 +1,29 @@
 <html>
 <head>
   <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+
   <script src="https://dist.3d.io/3dio-js/1.x.x-beta/3dio.min.js"></script>
 
   <script src="../dist/aframe-space-navigator-controls.js"></script>
+
+  <style>
+    #info {
+      font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif;
+      text-align: center;
+      z-index: 10000;
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      font-size: 18px;
+      font-weight: 400;
+      padding: 5px 0 12px 0;
+      background-color: rgba(255,255,255,0.9);
+    }
+    #info a {
+      color: darkblue;
+    }
+  </style>
+
 </head>
 <body>
 <a-scene>
@@ -32,5 +52,9 @@
   ></a-camera>
 
 </a-scene>
+
+<div id="info">
+  Space Navigator [3D Mouse] Component by <a href="https://3d.io">3d.io</a> for <a href="https://aframe.io">A-Frame</a>. View source code on <a href="https://github.com/archilogic-com/aframe-space-navigator-controls">Github</a>.
+</div>
 </body>
 </html>

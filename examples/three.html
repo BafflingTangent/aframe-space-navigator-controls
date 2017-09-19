@@ -18,25 +18,26 @@
       overflow: hidden;
     }
 
-    #info {
-      color:#000;
-      position: absolute;
-      top: 0px; width: 100%;
-      padding: 5px;
-
-    }
-
-    a {
-      color: red;
+     #info {
+       font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif;
+       text-align: center;
+       z-index: 10000;
+       position: absolute;
+       top: 0px;
+       width: 100%;
+       font-size: 18px;
+       font-weight: 400;
+       padding: 5px 0 12px 0;
+       background-color: rgba(255,255,255,0.9);
+     }
+    #info a {
+      color: darkblue;
     }
   </style>
 </head>
 
 <body>
 <div id="container"></div>
-<div id="info">
-  <a href="http://threejs.org" target="_blank" rel="noopener"></a> - space navigator controls example
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
 <script src="../dist/aframe-space-navigator-controls.js"></script>
@@ -154,6 +155,10 @@
   }
 
 </script>
+
+<div id="info">
+  Space Navigator [3D Mouse] Controls by <a href="https://3d.io">3d.io</a> for <a href="https://threejs.org">THREE.js</a>. View source code on <a href="https://github.com/archilogic-com/aframe-space-navigator-controls">Github</a>.
+</div>
 
 </body>
 </html>

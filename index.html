@@ -1,29 +1,39 @@
 <html>
 <head>
   <style>
-    a {
-      display: block;
-      margin: 10px;
+    body {
+      font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif;
+      padding: 40px;
+      text-align: center;
+      font-size: 20px;
+    }
+    #examples {
+      margin: 40px 0 40px 0;
+    }
+    #examples a {
+      display: inline-block;
+      margin: 0 0 0 6px;
+      padding: 0 4px 0 4px;
+    }
+    #intro-pic {
+      width: 700px;
     }
   </style>
 </head>
 <body>
 
-<h1>Space Navigator 3D Mouse for WebGL</h1>
+<h1>Space Navigator [3D Mouse] for WebGL</h1>
 
-<h3>Examples:</h3>
+<div id="examples">
+  Examples:
+  <a href="./examples/three.html">THREE.js</a>
+  <a href="./examples/aframe.html">A-Frame</a>
+  <a href="./examples/aframe-inspector.html">A-Frame Inspector</a>
+</div>
 
-<a href="./examples/aframe.html">
-  A-Frame Component
-</a>
+<br>
 
-<a href="./examples/aframe-inspector.html">
-  A-Frame Inspector
-</a>
-
-<a href="./examples/three.html">
-  THREE.js
-</a>
+<img id="intro-pic" src="./static/intro-pic.jpg"/>
 
 </body>
 </html>
