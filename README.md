@@ -7,7 +7,7 @@ Demos:
 * [A-Frame Component](https://archilogic-com.github.io/aframe-space-navigator-controls/examples/aframe.html)
 * [A-Frame Inspector](https://archilogic-com.github.io/aframe-space-navigator-controls/examples/aframe-inspector.html)
 
-## Basic Usage
+## Usage
 
 ### THREE.js
 
