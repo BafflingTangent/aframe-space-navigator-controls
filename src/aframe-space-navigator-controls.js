@@ -10,9 +10,7 @@
 
 var MAX_DELTA = 200, // ms
     ROTATION_EPS = 0.000,
-    MOVEMENT_EPS = 0.000,
     DEFAULT_FOV = 60,
-    PI_2 = Math.PI / 2,
     DEG_TO_RAD = 1 / 180 * Math.PI,
     RAD_TO_DEG = 180 / Math.PI
 
@@ -21,9 +19,6 @@ var MAX_DELTA = 200, // ms
 var SpaceNavigator = {
 
   schema: {
-
-    // Controller 0-3
-    controllerId:           { default: 0, oneOf: [0, 1, 2, 3] },
 
     // Enable/disable features
     enabled:              { default: true },
@@ -97,7 +92,7 @@ var SpaceNavigator = {
     })
 
     if (!this.getSpaceNavigator()) {
-      console.warn( 'Space Navigator not found. Connect and press any button to continue.', this.data.controllerId )
+      console.warn( 'Space Navigator not found. Connect and press any button to continue.')
     }
   },
 
@@ -295,8 +290,6 @@ var SpaceNavigator = {
       this.yaw.rotation.y -= delta.y
       this.roll.rotation.z += delta.z
 
-      //this.pitch.rotation.x = Math.max(-PI_2, Math.min(PI_2, this.pitch.rotation.x))
-
       this.rotation.set(
         this.pitch.rotation.x,
         this.yaw.rotation.y,
@@ -404,15 +397,39 @@ var SpaceNavigator = {
    */
   getSpaceNavigator: function () {
 
+    var this_ = this
     var proxyControls = this.el ? this.el.sceneEl.components['proxy-controls'] : null
 
     if (proxyControls) {
+
       // use proxy space navigator
-      return proxyControls && proxyControls.isConnected() && proxyControls.getSpaceNavigator(this.data.controllerId)
+      return proxyControls && proxyControls.isConnected() && proxyControls.getSpaceNavigator()
 
     } else {
       // use local space navigator
-      return navigator.getGamepads && navigator.getGamepads()[this.data.controllerId]
+
+      if (!navigator.getGamepads) {
+        console.error('Gamepad API is not supported on this browser. Please use Firefox or Chrome.')
+        return false
+      }
+
+      if (this.spaceNavigatorId === undefined) {
+        // find space navigator
+        var gamepadList = navigator.getGamepads()
+        Object.keys(gamepadList).forEach(function(i){
+          var gamepadName = gamepadList[i] ? gamepadList[i].id : null
+          if (gamepadName &&
+            (
+              gamepadName.toLowerCase().indexOf('spacenavigator') > -1
+              || gamepadName.toLowerCase().indexOf('space navigator') > -1
+            )
+          ) {
+            this_.spaceNavigatorId = i
+          }
+        })
+      }
+
+      return navigator.getGamepads()[this.spaceNavigatorId]
 
     }
   },
