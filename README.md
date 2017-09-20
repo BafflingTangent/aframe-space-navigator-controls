@@ -1,137 +1,90 @@
-# Space Navigator Controls for A-Frame
+# Space Navigator Controls for WebGL
 
-Based on:
-https://donmccurdy.github.io/aframe-gamepad-controls/
+Connects "Space Navigator" 3D mouse by [3Dconnexion](https://www.3dconnexion.de/) to JavaScript via the [gamepad browser API](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API). Based on the Three.js webGL library with support for A-Frame. Inspired and forked from the awesome [aframe-gamepad-controls](https://github.com/donmccurdy/aframe-gamepad-controls) component by [Don McCurdy](https://github.com/donmccurdy).
 
-## Overview
+Demos:
+* [THREE.js]()
+* [A-Frame Component]()
+* [A-Frame Inspector]()
 
-Supports one or more space navigators, attached to an A-Frame scene. When used on a mobile device, `space-navigator-controls` can also receive input from a Space Navigator connected to a host machine, using [ProxyControls.js](https://proxy-controls.donmccurdy.com).
+## Basic Usage
 
-This component uses the HTML5 [Gamepad API](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API). The underlying API supports Firefox, Chrome, Edge, and Opera ([as of 01/2016](http://caniuse.com/#search=gamepad)). Safari and Internet Explorer do not currently support gamepads.
+### THREE.js
 
-## Usage (script)
-
-```html
-<html>
-  <head>
-    <!-- A-Frame Library -->
-    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-
-    <!-- Component -->
+````html
+ <head>
+    <!-- Load THREE.js lib -->
+    <script src=""></script>
+    <!-- Load Space Navigator code -->
     <script src="https://rawgit.com/archilogic-com/aframe-space-navigator-controls/master/dist/aframe-space-navigator-controls.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <!-- ... -->
-      <a-entity camera space-navigator-controls></a-entity>
-    </a-scene>
-  </body>
-</html>
-```
+ </head>
+ <body>
+  <script>
+    
+    var camera = new THREE.Camera(60, window.innerWidth / window.innerHeight, 1, 1000)
+    
+    var options = { rollEnabled: false }
+    var controls = new THREE.SpaceNavigatorControls(options)
+    
+    // update on every frame frame
+    function animate() {
+        requestAnimationFrame(animate)
+    
+        // update space navigator
+        controls.update()
+        // update camera position
+        camera.position.copy(controls.position)
+        // update camera rotation
+        camera.rotation.copy(controls.rotation)
+        // when using mousewheel to control camera FOV
+        camera.fov = controls.fov
+        camera.updateProjectionMatrix()
+    
+        render()
+      }
+    
+  </script> 
+</body>
+````
 
-## Usage (NPM)
+### A-Frame
 
-Install NPM module.
-
-```
-$ npm install aframe-space-navigator-controls
-```
-
-Register `gamepad-controls` component.
-
-```javascript
-var AFRAME = require('aframe');
-var GamepadControls = require('aframe-space-navigator-controls');
-AFRAME.registerComponent('space-navigator-controls', GamepadControls);
-```
-
-Add markup.
-
-```html
-<!-- First-person controls -->
-<a-entity camera gamepad-controls></a-entity>
-
-<!-- Third-person controls -->
-<a-cube gamepad-controls="lookEnabled: false"></a-cube>
-
-<!-- Two players -->
-<a-obj-model src="player1.obj" gamepad-controls="controller: 0; lookEnabled: false"></a-obj-model>
-<a-obj-model src="player2.obj" gamepad-controls="controller: 1; lookEnabled: false"></a-obj-model>
-```
-
-## Development
-
-To edit the component or play with examples, [download the project](https://github.com/donmccurdy/aframe-gamepad-controls/archive/master.zip) and run:
-
-```shell
-npm install
-npm run dev
-```
-
-The demo will run at [http://localhost:8000/](http://localhost:8000/).
-
-## Mobile / Cardboard + Gamepad
-
-In Chrome on Android, USB gamepads can be connected with an OTG adapter. For a Nexus 5X, I use [this](http://www.amazon.com/gp/product/B00XHOGEZG). I'm not aware of a way to connect a gamepad in iOS, but definitely let me know if there's something I'm missing.
-
-The `gamepad-controls` component can also receive remote events with WebRTC, if a `proxy-controls` element is attached to the scene. [More details about ProxyControls.js](https://proxy-controls.donmccurdy.com).
-
-Example:
-
-```html
-<a-scene proxy-controls>
-  <a-entity camera
-            gamepad-controls>
-  </a-entity>
+````html
+ <head>
+    <!-- Load THREE.js lib -->
+    <script src=""></script>
+    <!-- Load SpaceNavigatorControls -->
+    <script src="https://rawgit.com/archilogic-com/aframe-space-navigator-controls/master/dist/aframe-space-navigator-controls.js"></script>
+ </head>
+ <body>
+ <a-scene>
+ 
+  <a-entity io3d-data3d="url:https://storage.3d.io/535e624259ee6b0200000484/170907-0007-612jp5/archilogic_2017-09-07_00-07-10_3g2lXj.gz.data3d.buffer"></a-entity>
+  
+  <a-camera
+    space-navigator-controls="
+      controllerId: 0;
+      movementEnabled: true;
+      lookEnabled: true;
+      rollEnabled: true;
+      invertPitch: false;
+      fovEnabled: false;
+      fovMin: 2;
+      fovMax: 115;
+      rotationSensitivity: 0.05;
+      movementEasing: 3;
+      movementAcceleration: 700;
+      fovSensitivity: 0.01;
+      fovEasing: 3;
+      fovAcceleration: 5;
+      invertScroll: false;
+    "
+    fov="55"
+  ></a-camera>
+    
 </a-scene>
-```
-
-## Gear VR
-
-A-Frame supports the Gear VR controller with `gear-vr-controller`, but for Gear VR's without a controller, this component can be used to handle it's trackpad events.
-
-For a cursor-based setup, `downEvents` must be set to `gamepadbuttondown`. For example:
-
-```html
-<a-entity cursor="downEvents: gamepadbuttondown; upEvents: gamepadbuttonup;"></a-entity>
-```
-
-## Button Events
-
-When buttons are pressed on the gamepad, a [GamepadButtonEvent](https://github.com/donmccurdy/aframe-gamepad-controls/blob/master/lib/GamepadButtonEvent.js) is emitted on the element. Components and entities may listen for these events and modify behavior as needed. Example:
-
-```javascript
-el.addEventListener('gamepadbuttondown', function (e) {
-  console.log('Button "%d" has been pressed.', e.index);
-});
-```
-
-**GamepadButtonEvent:**
-
-Property | Type    | Description
----------|---------|--------------
-type     | string  | Either `gamepadbuttondown` or `gamepadbuttonup`.
-index    | int     | Index of the button affected, 0..N.
-pressed  | boolean | Whether or not the button is currently pressed.
-value    | float   | Distance the button was pressed, if applicable. Value will be 0 or 1 in most cases, but may return a float on the interval [0..1] for trigger-like buttons.
-
-**Markup-only Binding:**
-
-For convenience, additional events are fired including the button index, providing a way to bind events to specific buttons using only markup. To play `pew-pew.wav` when `Button 7` is pressed (right trigger on an Xbox controller), you might do this:
-
-```html
-<a-entity gamepad-controls
-          sound="src: pew-pew.wav;
-                 on: gamepadbuttondown:7">
-</a-entity>
-```
-
-Finally, your code may call the `gamepad-controls` component directly to request the state of a button, as a [GamepadButton](https://developer.mozilla.org/en-US/docs/Web/API/GamepadButton) instance:
-
-```javascript
-el.components['gamepad-controls'].getButton(index);
-// Returns a GamepadButton instance.
-```
+</body>
+````
 
 ## Options
 
