@@ -23,7 +23,24 @@ Demos:
     
     var camera = new THREE.Camera(60, window.innerWidth / window.innerHeight, 1, 1000)
     
-    var options = { rollEnabled: false }
+    var options = {
+      rollEnabled: false,
+      movementEnabled: true,
+      lookEnabled: true,
+      rollEnabled: true,
+      invertPitch: false,
+      fovEnabled: false,
+      fovMin: 2,
+      fovMax: 115,
+      rotationSensitivity: 0.05,
+      movementEasing: 3,
+      movementAcceleration: 700,
+      fovSensitivity: 0.01,
+      fovEasing: 3,
+      fovAcceleration: 5,
+      invertScroll: false
+    }
+
     var controls = new THREE.SpaceNavigatorControls(options)
     
     // update on every frame frame
@@ -63,7 +80,6 @@ Demos:
   
   <a-camera
     space-navigator-controls="
-      controllerId: 0;
       movementEnabled: true;
       lookEnabled: true;
       rollEnabled: true;
@@ -85,15 +101,3 @@ Demos:
 </a-scene>
 </body>
 ````
-
-## Options
-
-Property          | Default | Description
-------------------|---------|-------------
-controller        | 0       | Which controller (0..3) the object should be attached to.
-enabled           | true    | Enables all events on this controller.
-movementEnabled   | true    | Enables movement via the left thumbstick.
-lookEnabled       | true    | `true`, or `false`. Enables view rotation via the right thumbstick.
-flyEnabled        | false   | Whether or not movement is restricted to the entity’s initial plane.
-invertAxisY       | false   | Invert Y axis of view rotation thumbstick.
-debug             | false   | When true, shows debugging info in the console.
