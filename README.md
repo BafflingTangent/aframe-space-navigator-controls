@@ -3,9 +3,9 @@
 Connects "Space Navigator" 3D mouse by [3Dconnexion](https://www.3dconnexion.de/) to JavaScript via the [gamepad browser API](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API). Based on the Three.js webGL library with support for A-Frame. Inspired and forked from the awesome [aframe-gamepad-controls](https://github.com/donmccurdy/aframe-gamepad-controls) component by [Don McCurdy](https://github.com/donmccurdy).
 
 Demos:
-* [THREE.js]()
-* [A-Frame Component]()
-* [A-Frame Inspector]()
+* [THREE.js](https://archilogic-com.github.io/aframe-space-navigator-controls/examples/three.html)
+* [A-Frame Component](https://archilogic-com.github.io/aframe-space-navigator-controls/examples/a-frame.html)
+* [A-Frame Inspector](https://archilogic-com.github.io/aframe-space-navigator-controls/examples/a-frame-inspector.html)
 
 ## Basic Usage
 
