@@ -21,8 +21,6 @@ Demos:
  <body>
   <script>
     
-    var camera = new THREE.Camera(60, window.innerWidth / window.innerHeight, 1, 1000)
-    
     var options = {
       rollEnabled: false,
       movementEnabled: true,
@@ -42,6 +40,8 @@ Demos:
     }
 
     var controls = new THREE.SpaceNavigatorControls(options)
+    
+    var camera = new THREE.Camera(60, window.innerWidth / window.innerHeight, 1, 1000)
     
     // update on every frame frame
     function animate() {
@@ -76,8 +76,6 @@ Demos:
  <body>
  <a-scene>
  
-  <a-entity io3d-data3d="url:https://storage.3d.io/535e624259ee6b0200000484/170907-0007-612jp5/archilogic_2017-09-07_00-07-10_3g2lXj.gz.data3d.buffer"></a-entity>
-  
   <a-camera
     space-navigator-controls="
       movementEnabled: true;
@@ -97,6 +95,8 @@ Demos:
     "
     fov="55"
   ></a-camera>
+  
+  <a-entity io3d-data3d="url:https://storage.3d.io/535e624259ee6b0200000484/170907-0007-612jp5/archilogic_2017-09-07_00-07-10_3g2lXj.gz.data3d.buffer"></a-entity>
     
 </a-scene>
 </body>
