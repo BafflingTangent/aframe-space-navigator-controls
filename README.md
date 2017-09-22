@@ -76,25 +76,22 @@ Demos:
  <body>
  <a-scene>
  
-  <a-camera
-    space-navigator-controls="
-      movementEnabled: true;
-      lookEnabled: true;
-      rollEnabled: true;
-      invertPitch: false;
-      fovEnabled: false;
-      fovMin: 2;
-      fovMax: 115;
-      rotationSensitivity: 0.05;
-      movementEasing: 3;
-      movementAcceleration: 700;
-      fovSensitivity: 0.01;
-      fovEasing: 3;
-      fovAcceleration: 5;
-      invertScroll: false;
-    "
-    fov="55"
-  ></a-camera>
+  <a-camera space-navigator-controls="
+     movementEnabled: true;
+     lookEnabled: true;
+     rollEnabled: true;
+     invertPitch: false;
+     fovEnabled: false;
+     fovMin: 2;
+     fovMax: 115;
+     rotationSensitivity: 0.05;
+     movementEasing: 3;
+     movementAcceleration: 700;
+     fovSensitivity: 0.01;
+     fovEasing: 3;
+     fovAcceleration: 5;
+     invertScroll: false;
+  " fov="55"></a-camera>
   
   <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
   <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
