@@ -96,7 +96,11 @@ Demos:
     fov="55"
   ></a-camera>
   
-  <a-entity io3d-data3d="url:https://storage.3d.io/535e624259ee6b0200000484/170907-0007-612jp5/archilogic_2017-09-07_00-07-10_3g2lXj.gz.data3d.buffer"></a-entity>
+  <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+  <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+  <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+  <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+  <a-sky color="#ECECEC"></a-sky>
     
 </a-scene>
 </body>
